@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daril Clock</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+
+        .clock {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            background-color: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .clock-face {
+            position: relative;
+            width: 90%;
+            height: 90%;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .hour-hand,
+        .minute-hand,
+        .second-hand {
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            background-color: #000;
+            transform-origin: bottom;
+            transform: translateX(-50%) translateY(100%);
+        }
+
+        .hour-hand {
+            width: 6px;
+            height: 60px;
+            border-radius: 3px;
+        }
+
+        .minute-hand {
+            width: 4px;
+            height: 80px;
+            border-radius: 2px;
+        }
+
+        .second-hand {
+            width: 2px;
+            height: 100px;
+        }
+
+        .center-dot {
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #000;
+            transform: translate(-50%, 50%);
+        }
+        .clock2 {
+            font-family: Arial, sans-serif;
+            font-size: 48px;
+            font-weight: bold;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .time2 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body style="display: grid; grid-template-rows: 1fr 1fr;">
+    <section>
+        <div class="clock">
+            <div class="clock-face">
+                <div class="hour-hand"></div>
+                <div class="minute-hand"></div>
+                <div class="second-hand"></div>
+                <div class="center-dot"></div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="clock2">
+            <div id="time2" class="time2">00:00:00</div>
+        </div>
+    </section>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const hour = now.getHours();
+            const minute = now.getMinutes();
+            const second = now.getSeconds();
+
+            const hourHand = document.querySelector('.hour-hand');
+            const minuteHand = document.querySelector('.minute-hand');
+            const secondHand = document.querySelector('.second-hand');
+
+            const hourAngle = (hour % 12) * 30 + minute * 0.5;
+            const minuteAngle = minute * 6;
+            const secondAngle = second * 6;
+
+            hourHand.style.transform = `rotate(${hourAngle}deg)`;
+            minuteHand.style.transform = `rotate(${minuteAngle}deg)`;
+            secondHand.style.transform = `rotate(${secondAngle}deg)`;
+        }
+
+        setInterval(updateClock, 1000);
+
+        function updateTime() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+
+            const timeString = `${hours}:${minutes}:${seconds}`;
+            const clockElement = document.getElementById('time2');
+            clockElement.textContent = timeString;
+        }
+
+        updateTime(); // Panggil fungsi updateTime untuk pertama kali agar tampilan waktu aktual muncul saat halaman dimuat.
+
+        setInterval(updateTime, 1000);
+
+
+    </script>
+</body>
+</html>
