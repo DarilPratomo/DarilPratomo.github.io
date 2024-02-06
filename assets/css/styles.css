@@ -178,6 +178,9 @@ img {
   z-index: var(--z-fixed);
   background-color: var(--body-color);
 }
+.header img {
+  border-radius: 35px;
+}
 
 /*==================== NAV ====================*/
 .nav {
@@ -1030,7 +1033,7 @@ img {
 }
 
 .footer__bg {
-  background-color: hsl(var(--hue-color), 8%, 15%);
+  background-color: var(--first-color);
   padding: 2rem 0 3rem;
 }
 
